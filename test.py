@@ -36,7 +36,7 @@ st.title("DEMO")
 st.write("API demo")
 
 select_model = st.text_input('Copy & paste model name...', placeholder=model_name, value=model_name)
-temp = st.text_input('Temperature', placeholder="temperature", value=0.7)
+temp = st.text_input('Temperature', placeholder="temperature", value=0.4)
 
 llm = ChatOpenAI(
     openai_api_key=openai_key,
