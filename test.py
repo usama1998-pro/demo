@@ -35,12 +35,18 @@ class SimpleCallback(BaseCallbackHandler):
 st.title("DEMO")
 st.write("API demo")
 
-select_model = st.text_input('Copy & paste model name...', placeholder=model_name, value=model_name)
+# select_model = st.text_input('Copy & paste model name...', placeholder=model_name, value=model_name)
+
+option = st.selectbox(
+    "Select your model",
+    (model_name, model_name + "-Turbo"),
+)
+
 temp = st.text_input('Temperature', placeholder="temperature", value=0.4)
 
 llm = ChatOpenAI(
     openai_api_key=openai_key,
-    model_name=select_model,
+    model_name=option,
     openai_api_base=base_url,
     temperature=temp,
     streaming=True,
