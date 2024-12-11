@@ -56,7 +56,11 @@ prompt = PromptTemplate.from_template(SYSPROMPT)
 
 chain = LLMChain(llm=llm, prompt=prompt)
 
+st.button("Submit", type="primary")
+
+st.write("LLM RESPONSE: ")
 res = st.empty()
+
 
 if SYSPROMPT or SYSPROMPT != "":
     # res.write(chain.run({'input': ''}))
