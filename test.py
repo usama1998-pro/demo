@@ -32,11 +32,6 @@ class SimpleCallback(BaseCallbackHandler):
         await self.q.put(job_done)
 
 
-st.title("DEMO")
-st.write("API demo")
-
-# select_model = st.text_input('Copy & paste model name...', placeholder=model_name, value=model_name)
-
 option = st.selectbox(
     "Select your model",
     (model_name, model_name + "-Turbo"),
