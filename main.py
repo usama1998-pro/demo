@@ -39,7 +39,7 @@ class SimpleCallback(BaseCallbackHandler):
 
 option = st.selectbox(
     "Select your model",
-    (model_name, model_name + "-Turbo"),
+    ("meta-llama/Meta-Llama-3.1-8B-Instruct", model_name, model_name + "-Turbo"),
 )
 
 temp = st.text_input('Temperature', placeholder="temperature", value=0.4)
