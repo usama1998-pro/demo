@@ -1,11 +1,10 @@
-import time
-
 import streamlit as st
 from llama_index.core.node_parser import SentenceSplitter
-from llama_index.core import Document
 from PyPDF2 import PdfReader
 import docx
-from langchain_openai import ChatOpenAI
+# from langchain_openai import ChatOpenAI
+
+from langchain.chat_models.openai import ChatOpenAI
 from langchain.prompts import PromptTemplate, ChatPromptTemplate
 from langchain.callbacks.base import BaseCallbackHandler
 from langchain.chains.llm import LLMChain
@@ -39,12 +38,12 @@ class SimpleCallback(BaseCallbackHandler):
 
 option = st.selectbox(
     "Select your model",
-    ("meta-llama/Meta-Llama-3.1-8B-Instruct", model_name, model_name + "-Turbo"),
+    (model_name, "llama-3.1-8b-instant"),
 )
 
 temp = st.text_input('Temperature', placeholder="temperature", value=0.4)
 
-chunk_size = st.number_input('Chunk Size', value=1300)
+chunk_size = st.number_input('Chunk Size', value=10_000)
 overlap = st.number_input('Chunk Overlap', value=20)
 
 llm = ChatOpenAI(
@@ -60,7 +59,7 @@ llm = ChatOpenAI(
 
 PROMPT = """
 [INST]
-As a summary generator, Use the same language used in the text provided below. Respond in tha same language as the text below paragraph. Please provide a clear, engaging summary of the above paragraph. Do not add any other explanation, just write summary without saying greetings or anything. Do no mention anything about yourself or that you have full filled the requirements. Do not mention sentence like 'Here's a summary of ... in bullet points:'
+As a summary generator, Use the same language used in the text provided below. Respond in tha same language as the text below paragraph. Please provide a clear, engaging summary of the above paragraph. Do not add any other explanation, just write summary of up to 800 words without saying greetings or anything. Do no mention anything about yourself or that you have full filled the requirements. Do not mention sentence like 'Here's a summary of ... in bullet points:'.
 [/INST]
 
 [TextToSummarize] {paragraph} [/TextToSummarize]
